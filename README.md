@@ -1,214 +1,149 @@
+<div align="center">
+
+<img src="./dist/AppIcon.iconset/icon_512x512@2x.png" width="96" alt="Maskli icon" />
+
 # Maskli
 
-Maskli is a macOS menu bar app that watches your clipboard and automatically masks sensitive strings locally before you paste them anywhere.
+**クリップボードの機密情報を、コピーした瞬間にローカルで自動マスクする macOS メニューバーアプリ**
 
-Maskli は、クリップボードを監視して、機密らしい文字列をローカルで自動マスクする macOS メニューバーアプリです。
+[![Swift](https://img.shields.io/badge/Swift-5.9-FA7343?logo=swift&logoColor=white)](https://swift.org)
+[![Platform](https://img.shields.io/badge/macOS-13+-000000?logo=apple)](https://developer.apple.com/macos/)
+[![License](https://img.shields.io/badge/license-MIT-blue)](#)
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)](#ビルドと起動) 
 
-## Overview / 概要
+[English](./README.en.md) | **日本語**
 
-- Runs in the macOS menu bar.
-- Watches copied text in the clipboard.
-- Detects supported secrets, emails, phone numbers, and secret-like URL parameters.
-- Rewrites the clipboard with a masked version.
-- Opens a settings window from the menu bar.
-- Supports undo for the most recent masking action.
-- Works fully locally. No external API is used.
+</div>
 
-- macOS のメニューバーで常駐します。
-- コピーされたテキストをクリップボード上で監視します。
-- 対応している秘密情報、メールアドレス、電話番号、URL 内の秘密パラメータを検出します。
-- マスク済みの文字列でクリップボードを上書きします。
-- メニューバーから設定画面を開けます。
-- 直前のマスク処理は Undo できます。
-- 完全ローカル動作で、外部 API は使いません。
+---
 
-## Features / 機能
+## 何ができるか
 
-### 1. Menu bar workflow / メニューバー常駐
+テキストをコピーすると Maskli がクリップボードを監視し、API キーやトークン・メールアドレス・電話番号などの機密値を**自動でマスクして上書き**します。外部 API は一切使わず、すべての処理はローカルで完結します。
 
-Maskli lives in the menu bar so it stays available without a full app window. From the menu bar popover you can:
+```
+コピー前: sk-proj-aBcDeFgHiJkLmNoPqRsTuVwX3456
+コピー後: sk-proj-****************************3456
+```
 
-- enable or pause masking
-- open Settings
-- review the latest masking preview
-- undo the last masking
-- quit the app
+---
 
-Maskli はメニューバー常駐型なので、通常のアプリウィンドウを出しっぱなしにせず使えます。メニューバーのポップオーバーから以下ができます。
+## 機能一覧
 
-- マスク機能のオン・オフ
-- Settings の表示
-- 直近のマスク結果プレビューの確認
-- 直前のマスクの Undo
+| 機能 | 説明 |
+|------|------|
+| 🔍 **自動検出 & マスク** | コピー時にクリップボードをスキャンし、機密値を即時置換 |
+| 📋 **複数値の一括処理** | 1 つのクリップボード内に複数の機密値が混在しても一括マスク |
+| 👁 **変換プレビュー** | 元テキスト／マスク後テキストをメニューバーから即確認 |
+| ↩️ **Undo サポート** | 直前のマスクを 1 ステップ元に戻せる |
+| ⚙️ **カテゴリ別 ON/OFF** | API キー・メール・電話番号などをカテゴリ単位で有効化 |
+| 🔒 **完全ローカル動作** | 外部 API へのデータ送信なし |
+
+---
+
+## メニューバーからできること
+
+メニューバーアイコンをクリックすると、以下の操作が可能です。
+
+- マスク機能の ON / OFF 切り替え
+- 直近の変換結果プレビュー
+- `Undo Last Mask` で 1 つ前の状態に戻す
+- Settings（設定画面）を開く
 - アプリの終了
 
-### 2. Automatic masking on copy / コピー時の自動マスク
+---
 
-When you copy text, Maskli checks the clipboard contents. If supported sensitive values are found, the clipboard is replaced with a masked version automatically.
+## 対応している機密情報タイプ
 
-テキストをコピーすると、Maskli がクリップボードの内容を確認します。対応している機密値が見つかった場合は、自動でマスク済みの内容に置き換えます。
+<details>
+<summary><strong>🔑 API キー・トークン（クリックで展開）</strong></summary>
 
-### 3. Multiple matches in one clipboard entry / 1つのクリップボード内の複数検出
+| サービス | パターン例 |
+|----------|-----------|
+| OpenAI | `sk-...`, `sk-proj-...` |
+| AWS | `AKIA...` |
+| GitHub | `ghp_...`, `gho_...`, `ghu_...`, `ghs_...`, `ghr_...` |
+| Stripe | `sk_live_...`, `sk_test_...`, `pk_live_...`, `pk_test_...` |
+| Supabase | `sb_...`（例: `sb_publishable_...`） |
+| JWT | `eyJxxxxx.yyyyy.zzzzz` |
+| 代入形式 | `token=...`, `access_token=...`, `secret=...`, `api_key=...` など |
+| URL クエリ | `?token=...`, `?key=...`, `?api_key=...`, `?secret=...` など |
 
-Maskli supports multiple sensitive values in a single clipboard entry. For example, if one copied string contains an email address, a phone number, and a token, all of them can be masked in one pass.
+</details>
 
-Maskli は、1つのクリップボード文字列の中に複数の機密値が含まれているケースにも対応しています。たとえば、メールアドレス、電話番号、トークンが同時に含まれていても、1回の処理でまとめてマスクできます。
+<details>
+<summary><strong>👤 個人情報</strong></summary>
 
-### 4. Recent conversion preview / 直近変換のプレビュー
+| 種別 | 例 |
+|------|----|
+| メールアドレス | `user@example.com` → `u***@example.com` |
+| 電話番号 | `090-1234-5678` → `+** **-****-5678` |
 
-The app keeps the latest original and masked preview in the UI so you can quickly confirm what changed.
+</details>
 
-UI 上で直近の元テキストとマスク後テキストのプレビューを保持するので、何が変わったかをすぐ確認できます。
+---
 
-### 5. Undo last mask / 直前のマスクを元に戻す
+## マスクスタイル
 
-If the latest masking was not what you wanted, you can restore the previous clipboard value with `Undo Last Mask`.
+3 種類のスタイルから選べます。デフォルトは `Partial` です。
 
-直近のマスク結果が意図と違った場合は、`Undo Last Mask` でひとつ前のクリップボード内容に戻せます。
+### Partial（デフォルト）
 
-## Supported Sensitive Types / 対応している機密情報タイプ
+種類が判別できる程度の形を残しつつ、重要部分を隠します。
 
-Maskli currently supports the following patterns.
+```
+# プレフィックスを保持してマスク
+sk-proj-****************************3456
+ghp_****************************3456
+AKIA************CD12
 
-現時点で Maskli が対応している主なパターンは次の通りです。
+# 先頭・末尾 4 文字を保持（一般トークン）
+token=supe************0000
 
-### API keys and tokens / API キー・トークン
+# URL クエリ内もマスク（他のパラメータは維持）
+https://example.com/callback?token=supe************0000&mode=prod
 
-- OpenAI API keys
-  - `sk-...`
-  - `sk-proj-...`
-- AWS access keys
-  - `AKIA...`
-- GitHub personal and related tokens
-  - `ghp_...`
-  - `gho_...`
-  - `ghu_...`
-  - `ghs_...`
-  - `ghr_...`
-- Stripe keys
-  - `sk_live_...`
-  - `sk_test_...`
-  - `pk_live_...`
-  - `pk_test_...`
-- Supabase-style keys
-  - `sb_...`
-  - example: `sb_publishable_...`
-- JWT-like tokens
-  - `eyJxxxxx.yyyyy.zzzzz`
-- Assigned secret values in text
-  - `token=...`
-  - `access_token=...`
-  - `refresh_token=...`
-  - `secret=...`
-  - `client_secret=...`
-  - `api_key=...`
-  - also supports `:` as in `token: ...`
-- Secret-like URL query values
-  - `?token=...`
-  - `?key=...`
-  - `?api_key=...`
-  - `?access_token=...`
-  - `?secret=...`
-  - `?client_secret=...`
+# 個人情報
+a****@example.com
++** **-****-5678
+```
 
-### Personal contact data / 個人連絡先
+### Full
 
-- Email addresses
-  - example: `alice@example.com`
-- Phone numbers
-  - international and separator-based forms such as `+81 90-1234-5678`
+検出した値全体をアスタリスクで置換します。
 
-## Masking Examples / マスク例
+```
+a****@example.com  →  ****
+ghp_****3456       →  ****
+```
 
-The default masking style is `Partial`.
+### Category Label
 
-デフォルトのマスク方式は `Partial` です。
+値の種類を示すラベルに置換します。
 
-### Partial / 部分マスク
+```
+a****@example.com        →  [EMAIL]
+ghp_****3456             →  [TOKEN]
+AKIA************CD12     →  [API_KEY]
++** **-****-5678         →  [PHONE]
+```
 
-Maskli tries to keep just enough of the original shape to stay recognizable while hiding the sensitive part.
+---
 
-Maskli は、何の値かが分かる程度の形は残しつつ、重要な部分を隠します。
+## 設定項目
 
-- OpenAI key
-  - `sk-proj-abcdefghijklmnopqrstuvwxyz123456`
-  - `sk-proj-**************************3456`
-- GitHub token
-  - `ghp_abcdefghijklmnopqrstuvwxyz123456`
-  - `ghp_**************************3456`
-- Supabase key
-  - `sb_abcdefghijklmnopqrstuvw789`
-  - `sb_***********************w789`
-- Assigned token
-  - `token=supersecretvalue0000`
-  - `token=supe************0000`
-- URL query secret
-  - `https://example.com/callback?token=supersecretvalue0000&mode=prod`
-  - `https://example.com/callback?token=supe************0000&mode=prod`
-- Email
-  - `alice@example.com`
-  - `a****@example.com`
-- Phone
-  - `+81 90-1234-5678`
-  - `+** **-****-5678`
+設定画面（Settings）では以下を調整できます。
 
-Notes:
+### General
 
-- For known token prefixes such as `sk-`, `sk-proj-`, `ghp_`, `AKIA`, `sk_live_`, `pk_test_`, the prefix is preserved.
-- For general token-like values without a known vendor prefix, Maskli keeps the first 4 characters and the last 4 characters.
-- For emails, Maskli keeps the domain and only the first character of the local part.
-- For phone numbers, Maskli keeps the last 4 digits.
+| 項目 | 説明 |
+|------|------|
+| `Enable masking` | クリップボードの自動マスクを有効化 / 停止 |
+| `Launch at login` | ログイン時に Maskli を自動起動 |
 
-補足:
+### Categories
 
-- `sk-`, `sk-proj-`, `ghp_`, `AKIA`, `sk_live_`, `pk_test_` など、既知のプレフィックスは残します。
-- ベンダー固有のプレフィックスがない一般的なトークン風文字列は、先頭 4 文字と末尾 4 文字を残します。
-- メールアドレスはドメインとローカル部の先頭 1 文字を残します。
-- 電話番号は末尾 4 桁を残します。
-
-### Full / 完全マスク
-
-`Full` replaces the detected value with only asterisks.
-
-`Full` は、検出した値をアスタリスクのみで置き換えます。
-
-- `alice@example.com` -> fully replaced with `*`
-- `ghp_abcdefghijklmnopqrstuvwxyz123456` -> fully replaced with `*`
-
-- `alice@example.com` は `*` のみで置き換えられます
-- `ghp_abcdefghijklmnopqrstuvwxyz123456` も `*` のみで置き換えられます
-
-### Category Label / カテゴリラベル
-
-`Category Label` replaces the value with a type label.
-
-`Category Label` は、値そのものではなくカテゴリ名に置き換えます。
-
-- `alice@example.com` -> `[EMAIL]`
-- `ghp_abcdefghijklmnopqrstuvwxyz123456` -> `[TOKEN]`
-- `AKIA1234567890ABCD12` -> `[API_KEY]`
-- `+81 90-1234-5678` -> `[PHONE]`
-
-## Settings / 設定項目
-
-Maskli provides the following settings window options.
-
-Maskli の設定画面では次の項目を調整できます。
-
-### General / 一般
-
-- `Enable masking`
-  - Turns clipboard masking on or off.
-  - クリップボードの自動マスクを有効化または停止します。
-- `Launch at login`
-  - Attempts to start Maskli automatically when you log in to macOS.
-  - macOS ログイン時に Maskli を自動起動する設定です。
-
-### Categories / カテゴリ
-
-You can enable or disable masking by category.
-
-カテゴリごとにマスク対象をオン・オフできます。
+カテゴリごとに検出対象を切り替えられます。
 
 - `API Key`
 - `Token`
@@ -216,81 +151,75 @@ You can enable or disable masking by category.
 - `Phone`
 - `URL Secret`
 
-### Mask Style / マスク方式
+### Mask Style
 
-You can choose how detected values are rewritten.
+`Partial` / `Full` / `Category Label` から選択。
 
-検出した値をどのように置き換えるかを選べます。
+### Last Conversion
 
-- `Partial`
-  - Keeps part of the original structure visible.
-  - 元の形を一部残します。
-- `Full`
-  - Replaces the entire value with `*`.
-  - 全体を `*` で隠します。
-- `Category Label`
-  - Replaces the value with labels such as `[EMAIL]` or `[API_KEY]`.
-  - `[EMAIL]` や `[API_KEY]` のようなラベルに置き換えます。
-
-### Last Conversion / 直近の変換結果
-
-The settings window also shows:
-
-設定画面では以下も確認できます。
-
-- original preview
-- masked preview
-- number of detections
-- `Undo Last Mask`
+設定画面で以下を確認できます。
 
 - 元テキストのプレビュー
 - マスク後テキストのプレビュー
 - 検出件数
-- `Undo Last Mask`
+- `Undo Last Mask` ボタン
 
-## Build and Run / ビルドと起動
+---
 
-### Development / 開発用
+## ダウンロード
+
+### ワンライナーでインストール
 
 ```bash
-cd /Users/masataka/Coding/Swift/clipboard-masker
+curl -L -o Maskli.zip https://github.com/mksmkss/Maskly/releases/latest/download/Maskli.zip && unzip -o Maskli.zip && open Maskli.app
+```
+
+### 手動インストール
+
+1. [Releases](https://github.com/mksmkss/Maskly/releases/latest) から `Maskli.zip` をダウンロード
+2. ZIP を展開して `Maskli.app` を `/Applications` へ移動
+3. アプリを起動
+
+---
+
+## ビルドと起動（開発者向け）
+
+### 開発用（swift run）
+
+```bash
 swift test
 swift run ClipboardMaskerApp
 ```
 
-`swift run` is useful for development, but the real menu bar app behavior is best tested with the `.app` bundle.
+> [!NOTE]
+> `swift run` は開発時の確認に便利ですが、実際のメニューバー挙動を確認するには `.app` バンドルでの起動を推奨します。
 
-`swift run` は開発には便利ですが、実際のメニューバーアプリ挙動を確認するには `.app` バンドルでの起動が適しています。
-
-### App bundle / `.app` バンドル
+### .app バンドルとして起動
 
 ```bash
-cd /Users/masataka/Coding/Swift/clipboard-masker
 ./App/build-app.sh
-open dist/ClipboardMasker.app
+open dist/Maskli.app
 ```
 
-## Project Structure / 構成
+---
 
-- `Sources/ClipboardMaskerCore`
-  - detection, preprocessing, masking policies, and settings model
-  - 検出、前処理、マスク方式、設定モデル
-- `Sources/ClipboardMaskerApp`
-  - menu bar UI, clipboard monitoring, and settings window
-  - メニューバー UI、クリップボード監視、設定画面
-- `Tests/ClipboardMaskerCoreTests`
-  - detector and masking tests
-  - 検出とマスク処理のテスト
-- `App/build-app.sh`
-  - app bundle build script
-  - `.app` バンドルを組み立てるスクリプト
+## プロジェクト構成
 
-## Notes / 補足
+```
+Maskli/
+├── Sources/
+│   ├── ClipboardMaskerCore/       # 検出・前処理・マスク方式・設定モデル
+│   └── ClipboardMaskerApp/        # メニューバー UI・クリップボード監視・設定画面
+├── Tests/
+│   └── ClipboardMaskerCoreTests/  # 検出とマスク処理のテスト
+└── App/
+    └── build-app.sh               # .app バンドルを組み立てるスクリプト
+```
 
-- Maskli currently focuses on rule-based detection.
-- Person names and company names are not actively detected yet.
-- Launch at login uses `SMAppService`, so actual behavior can depend on signing state and app location.
+---
 
-- Maskli は現在、ルールベース検出が中心です。
-- 人名・企業名の自動検出はまだ有効化していません。
-- ログイン時起動は `SMAppService` を使っているため、署名状態や配置場所によって macOS 側の挙動が変わることがあります。
+## 補足・既知の制限
+
+> [!NOTE]
+> - 現在はルールベース検出が中心です。人名・企業名の自動検出は未実装です。
+> - ログイン時起動は `SMAppService` を使用しているため、署名状態や配置場所によって macOS 側の挙動が変わる場合があります。

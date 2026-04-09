@@ -150,7 +150,7 @@ final class AppModel {
     }
 
     func showLaunchBanner() {
-        launchBannerMessage = "ClipboardMasker is running in the menu bar"
+        launchBannerMessage = "\(AppMetadata.appName) is running in the menu bar"
     }
 
     func dismissLaunchBanner() {

@@ -38,10 +38,10 @@ final class StatusBarController: NSObject {
 
         button.image = NSImage(
             systemSymbolName: "lock.shield.fill",
-            accessibilityDescription: "ClipboardMasker"
+            accessibilityDescription: AppMetadata.appName
         )
         button.imagePosition = .imageOnly
-        button.toolTip = "ClipboardMasker"
+        button.toolTip = AppMetadata.appName
         button.target = self
         button.action = #selector(togglePopover(_:))
     }

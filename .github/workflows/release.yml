@@ -23,7 +23,7 @@ jobs:
 
       - name: Resolve release metadata
         id: meta
-        shell: zsh
+        shell: bash
         run: |
           if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
             VERSION="${GITHUB_REF_NAME#v}"

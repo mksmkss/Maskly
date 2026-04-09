@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./dist/AppIcon.iconset/icon_512x512@2x.png" width="96" alt="Maskli icon" />
+<img src="./icon.png" width="96" alt="Maskli icon" />
 
 # Maskli
 
@@ -22,9 +22,25 @@
 When you copy text, Maskli scans the clipboard and **automatically replaces** any detected secrets — API keys, tokens, email addresses, phone numbers — with a masked version. Everything runs locally; no external API is ever called.
 
 ```
-Before: sk-proj-************************3456
+Before: sk-proj-aBcDeFgHiJkLmNoPqRsTuVwX3456
 After:  sk-proj-****************************3456
 ```
+
+---
+
+## Download
+
+### One-liner install
+
+```bash
+curl -L -o /tmp/Maskli.zip https://github.com/mksmkss/Maskly/releases/latest/download/Maskli.zip && unzip -o /tmp/Maskli.zip -d /tmp && mv /tmp/Maskli.app /Applications/Maskli.app && open /Applications/Maskli.app
+```
+
+### Manual install
+
+1. Download `Maskli.zip` from [Releases](https://github.com/mksmkss/Maskly/releases/latest)
+2. Unzip and move `Maskli.app` to `/Applications`
+3. Launch the app
 
 ---
 
@@ -76,8 +92,8 @@ Click the menu bar icon to:
 
 | Type | Example |
 |------|---------|
-| Email address | `u***@example.com` → `u***@example.com` |
-| Phone number | `***-****-5678` → `+** **-****-5678` |
+| Email address | `user@example.com` → `u***@example.com` |
+| Phone number | `090-1234-5678` → `+** **-****-5678` |
 
 </details>
 
@@ -164,21 +180,7 @@ The settings window also shows:
 
 ---
 
-## Download
 
-### One-liner install
-
-```bash
-curl -L -o Maskli.zip https://github.com/mksmkss/Maskly/releases/latest/download/Maskli.zip && unzip -o Maskli.zip && open Maskli.app
-```
-
-### Manual install
-
-1. Download `Maskli.zip` from [Releases](https://github.com/mksmkss/Maskly/releases/latest)
-2. Unzip and move `Maskli.app` to `/Applications`
-3. Launch the app
-
----
 
 ## Build and run (for developers)
 
@@ -186,7 +188,7 @@ curl -L -o Maskli.zip https://github.com/mksmkss/Maskly/releases/latest/download
 
 ```bash
 swift test
-swift run ClipboardMaskerApp
+swift run MaskliApp
 ```
 
 > [!NOTE]
@@ -214,10 +216,10 @@ This creates `dist/Maskli.zip`, ready to upload to GitHub Releases.
 ```
 Maskli/
 ├── Sources/
-│   ├── ClipboardMaskerCore/       # Detection, preprocessing, masking policies, settings model
-│   └── ClipboardMaskerApp/        # Menu bar UI, clipboard monitoring, settings window
+│   ├── MaskliCore/                # Detection, preprocessing, masking policies, settings model
+│   └── MaskliApp/                 # Menu bar UI, clipboard monitoring, settings window
 ├── Tests/
-│   └── ClipboardMaskerCoreTests/  # Detector and masking tests
+│   └── MaskliCoreTests/           # Detector and masking tests
 └── App/
     ├── build-app.sh               # App bundle build script
     └── package-release.sh         # Release zip build script

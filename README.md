@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./dist/AppIcon.iconset/icon_512x512@2x.png" width="96" alt="Maskli icon" />
+<img src="./icon.png" width="96" alt="Maskli icon" />
 
 # Maskli
 
@@ -25,6 +25,22 @@
 コピー前: sk-proj-aBcDeFgHiJkLmNoPqRsTuVwX3456
 コピー後: sk-proj-****************************3456
 ```
+
+---
+
+## ダウンロード
+
+### ワンライナーでインストール
+
+```bash
+curl -L -o /tmp/Maskli.zip https://github.com/mksmkss/Maskly/releases/latest/download/Maskli.zip && unzip -o /tmp/Maskli.zip -d /tmp && mv /tmp/Maskli.app /Applications/Maskli.app && open /Applications/Maskli.app
+```
+
+### 手動インストール
+
+1. [Releases](https://github.com/mksmkss/Maskly/releases/latest) から `Maskli.zip` をダウンロード
+2. ZIP を展開して `Maskli.app` を `/Applications` へ移動
+3. アプリを起動
 
 ---
 
@@ -166,29 +182,13 @@ AKIA************CD12     →  [API_KEY]
 
 ---
 
-## ダウンロード
-
-### ワンライナーでインストール
-
-```bash
-curl -L -o Maskli.zip https://github.com/mksmkss/Maskly/releases/latest/download/Maskli.zip && unzip -o Maskli.zip && open Maskli.app
-```
-
-### 手動インストール
-
-1. [Releases](https://github.com/mksmkss/Maskly/releases/latest) から `Maskli.zip` をダウンロード
-2. ZIP を展開して `Maskli.app` を `/Applications` へ移動
-3. アプリを起動
-
----
-
 ## ビルドと起動（開発者向け）
 
 ### 開発用（swift run）
 
 ```bash
 swift test
-swift run ClipboardMaskerApp
+swift run MaskliApp
 ```
 
 > [!NOTE]
@@ -208,10 +208,10 @@ open dist/Maskli.app
 ```
 Maskli/
 ├── Sources/
-│   ├── ClipboardMaskerCore/       # 検出・前処理・マスク方式・設定モデル
-│   └── ClipboardMaskerApp/        # メニューバー UI・クリップボード監視・設定画面
+│   ├── MaskliCore/                # 検出・前処理・マスク方式・設定モデル
+│   └── MaskliApp/                 # メニューバー UI・クリップボード監視・設定画面
 ├── Tests/
-│   └── ClipboardMaskerCoreTests/  # 検出とマスク処理のテスト
+│   └── MaskliCoreTests/           # 検出とマスク処理のテスト
 └── App/
     └── build-app.sh               # .app バンドルを組み立てるスクリプト
 ```

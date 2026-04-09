@@ -12,7 +12,7 @@ ICNS_PATH="$DIST_DIR/AppIcon.icns"
 
 cd "$APP_ROOT"
 
-swift build -c release --product ClipboardMaskerApp
+swift build -c release --product MaskliApp
 BIN_PATH=$(swift build -c release --show-bin-path)
 
 rm -rf "$APP_BUNDLE"
@@ -44,7 +44,7 @@ if [[ -n "$RESOLVED_ICON_SOURCE" ]]; then
   cp "$ICNS_PATH" "$APP_BUNDLE/Contents/Resources/AppIcon.icns"
 fi
 
-cp "$BIN_PATH/ClipboardMaskerApp" "$APP_BUNDLE/Contents/MacOS/ClipboardMaskerApp"
+cp "$BIN_PATH/MaskliApp" "$APP_BUNDLE/Contents/MacOS/MaskliApp"
 cp "$SCRIPT_DIR/Info.plist" "$APP_BUNDLE/Contents/Info.plist"
 
 echo "Built $APP_BUNDLE"

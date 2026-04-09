@@ -33,12 +33,12 @@
 ### ワンライナーでインストール
 
 ```bash
-curl -L -o /tmp/Maskli.zip https://github.com/mksmkss/Maskly/releases/latest/download/Maskli.zip && unzip -o /tmp/Maskli.zip -d /tmp && mv /tmp/Maskli.app /Applications/Maskli.app && open /Applications/Maskli.app
+curl -L -o /tmp/Maskli.zip https://github.com/mksmkss/Maskli/releases/latest/download/Maskli.zip && unzip -o /tmp/Maskli.zip -d /tmp && mv /tmp/Maskli.app /Applications/Maskli.app && open /Applications/Maskli.app
 ```
 
 ### 手動インストール
 
-1. [Releases](https://github.com/mksmkss/Maskly/releases/latest) から `Maskli.zip` をダウンロード
+1. [Releases](https://github.com/mksmkss/Maskli/releases/latest) から `Maskli.zip` をダウンロード
 2. ZIP を展開して `Maskli.app` を `/Applications` へ移動
 3. アプリを起動
 

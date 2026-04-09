@@ -1,5 +1,5 @@
 import AppKit
-import ClipboardMaskerCore
+import MaskliCore
 import SwiftUI
 
 struct MenuBarContentView: View {

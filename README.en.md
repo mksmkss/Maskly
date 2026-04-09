@@ -186,7 +186,7 @@ curl -L -o Maskli.zip https://github.com/mksmkss/Maskly/releases/latest/download
 
 ```bash
 swift test
-swift run ClipboardMaskerApp
+swift run MaskliApp
 ```
 
 > [!NOTE]
@@ -214,10 +214,10 @@ This creates `dist/Maskli.zip`, ready to upload to GitHub Releases.
 ```
 Maskli/
 ├── Sources/
-│   ├── ClipboardMaskerCore/       # Detection, preprocessing, masking policies, settings model
-│   └── ClipboardMaskerApp/        # Menu bar UI, clipboard monitoring, settings window
+│   ├── MaskliCore/                # Detection, preprocessing, masking policies, settings model
+│   └── MaskliApp/                 # Menu bar UI, clipboard monitoring, settings window
 ├── Tests/
-│   └── ClipboardMaskerCoreTests/  # Detector and masking tests
+│   └── MaskliCoreTests/           # Detector and masking tests
 └── App/
     ├── build-app.sh               # App bundle build script
     └── package-release.sh         # Release zip build script

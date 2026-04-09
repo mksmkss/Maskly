@@ -1,4 +1,4 @@
-@testable import ClipboardMaskerCore
+@testable import MaskliCore
 import Testing
 
 @Test

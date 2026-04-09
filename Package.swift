@@ -2,31 +2,31 @@
 import PackageDescription
 
 let package = Package(
-    name: "ClipboardMasker",
+    name: "Maskli",
     platforms: [
         .macOS(.v14),
     ],
     products: [
         .library(
-            name: "ClipboardMaskerCore",
-            targets: ["ClipboardMaskerCore"]
+            name: "MaskliCore",
+            targets: ["MaskliCore"]
         ),
         .executable(
-            name: "ClipboardMaskerApp",
-            targets: ["ClipboardMaskerApp"]
+            name: "MaskliApp",
+            targets: ["MaskliApp"]
         ),
     ],
     targets: [
         .target(
-            name: "ClipboardMaskerCore"
+            name: "MaskliCore"
         ),
         .executableTarget(
-            name: "ClipboardMaskerApp",
-            dependencies: ["ClipboardMaskerCore"]
+            name: "MaskliApp",
+            dependencies: ["MaskliCore"]
         ),
         .testTarget(
-            name: "ClipboardMaskerCoreTests",
-            dependencies: ["ClipboardMaskerCore"]
+            name: "MaskliCoreTests",
+            dependencies: ["MaskliCore"]
         ),
     ]
 )

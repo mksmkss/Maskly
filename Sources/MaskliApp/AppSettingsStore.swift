@@ -1,4 +1,4 @@
-import ClipboardMaskerCore
+import MaskliCore
 import Foundation
 
 @MainActor

@@ -1,4 +1,4 @@
-import ClipboardMaskerCore
+import MaskliCore
 import SwiftUI
 
 struct SettingsView: View {

@@ -32,9 +32,9 @@ jobs:
             PRERELEASE="false"
           else
             VERSION="1.0.${GITHUB_RUN_NUMBER}"
-            TAG_NAME="main-latest"
-            RELEASE_NAME="Maskli main build ${GITHUB_RUN_NUMBER}"
-            PRERELEASE="true"
+            TAG_NAME="latest"
+            RELEASE_NAME="Maskli latest"
+            PRERELEASE="false"
           fi
 
           {

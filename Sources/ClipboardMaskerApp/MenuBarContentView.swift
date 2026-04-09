@@ -60,6 +60,12 @@ struct MenuBarContentView: View {
             Button("Quit") {
                 NSApplication.shared.terminate(nil)
             }
+
+            Divider()
+            Text(AppMetadata.menuFooter)
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .center)
         }
         .padding(14)
         .frame(width: 360)

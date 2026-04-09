@@ -9,7 +9,7 @@
 [![Swift](https://img.shields.io/badge/Swift-5.9-FA7343?logo=swift&logoColor=white)](https://swift.org)
 [![Platform](https://img.shields.io/badge/macOS-13+-000000?logo=apple)](https://developer.apple.com/macos/)
 [![License](https://img.shields.io/badge/license-MIT-blue)](#)
-[![Build](https://img.shields.io/badge/build-passing-brightgreen)](#ビルドと起動)
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)](#ビルドと起動) 
 
 [English](./README.en.md) | **日本語**
 

@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./dist/AppIcon.iconset/icon_512x512@2x.png" width="96" alt="Maskli icon" />
+<img src="./icon.png" width="96" alt="Maskli icon" />
 
 # Maskli
 
@@ -22,7 +22,7 @@
 When you copy text, Maskli scans the clipboard and **automatically replaces** any detected secrets — API keys, tokens, email addresses, phone numbers — with a masked version. Everything runs locally; no external API is ever called.
 
 ```
-Before: sk-proj-************************3456
+Before: sk-proj-aBcDeFgHiJkLmNoPqRsTuVwX3456
 After:  sk-proj-****************************3456
 ```
 
@@ -76,8 +76,8 @@ Click the menu bar icon to:
 
 | Type | Example |
 |------|---------|
-| Email address | `u***@example.com` → `u***@example.com` |
-| Phone number | `***-****-5678` → `+** **-****-5678` |
+| Email address | `user@example.com` → `u***@example.com` |
+| Phone number | `090-1234-5678` → `+** **-****-5678` |
 
 </details>
 

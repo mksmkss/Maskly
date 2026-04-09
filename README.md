@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./dist/AppIcon.iconset/icon_512x512@2x.png" width="96" alt="Maskli icon" />
+<img src="./icon.png" width="96" alt="Maskli icon" />
 
 # Maskli
 

@@ -28,6 +28,22 @@
 
 ---
 
+## ダウンロード
+
+### ワンライナーでインストール
+
+```bash
+curl -L -o /tmp/Maskli.zip https://github.com/mksmkss/Maskly/releases/latest/download/Maskli.zip && unzip -o /tmp/Maskli.zip -d /tmp && mv /tmp/Maskli.app /Applications/Maskli.app && open /Applications/Maskli.app
+```
+
+### 手動インストール
+
+1. [Releases](https://github.com/mksmkss/Maskly/releases/latest) から `Maskli.zip` をダウンロード
+2. ZIP を展開して `Maskli.app` を `/Applications` へ移動
+3. アプリを起動
+
+---
+
 ## 機能一覧
 
 | 機能 | 説明 |
@@ -163,22 +179,6 @@ AKIA************CD12     →  [API_KEY]
 - マスク後テキストのプレビュー
 - 検出件数
 - `Undo Last Mask` ボタン
-
----
-
-## ダウンロード
-
-### ワンライナーでインストール
-
-```bash
-curl -L -o Maskli.zip https://github.com/mksmkss/Maskly/releases/latest/download/Maskli.zip && unzip -o Maskli.zip && open Maskli.app
-```
-
-### 手動インストール
-
-1. [Releases](https://github.com/mksmkss/Maskly/releases/latest) から `Maskli.zip` をダウンロード
-2. ZIP を展開して `Maskli.app` を `/Applications` へ移動
-3. アプリを起動
 
 ---
 

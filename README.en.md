@@ -28,6 +28,22 @@ After:  sk-proj-****************************3456
 
 ---
 
+## Download
+
+### One-liner install
+
+```bash
+curl -L -o /tmp/Maskli.zip https://github.com/mksmkss/Maskly/releases/latest/download/Maskli.zip && unzip -o /tmp/Maskli.zip -d /tmp && mv /tmp/Maskli.app /Applications/Maskli.app && open /Applications/Maskli.app
+```
+
+### Manual install
+
+1. Download `Maskli.zip` from [Releases](https://github.com/mksmkss/Maskly/releases/latest)
+2. Unzip and move `Maskli.app` to `/Applications`
+3. Launch the app
+
+---
+
 ## Features
 
 | Feature | Description |
@@ -164,21 +180,7 @@ The settings window also shows:
 
 ---
 
-## Download
 
-### One-liner install
-
-```bash
-curl -L -o Maskli.zip https://github.com/mksmkss/Maskly/releases/latest/download/Maskli.zip && unzip -o Maskli.zip && open Maskli.app
-```
-
-### Manual install
-
-1. Download `Maskli.zip` from [Releases](https://github.com/mksmkss/Maskly/releases/latest)
-2. Unzip and move `Maskli.app` to `/Applications`
-3. Launch the app
-
----
 
 ## Build and run (for developers)
 
